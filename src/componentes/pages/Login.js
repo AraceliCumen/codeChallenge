@@ -14,20 +14,14 @@ class Login extends Component {
     }
 
     onButtonClick = e => {
-        var result = '';
         db.collection('users').get().then((snapShots) => {
-            snapShots.docs.map(doc => {
-                let email = doc.data().email;
-                let password = doc.data().password;    
-                if(email === this.state.email && password === this.state.password){
-                    result = 'login correcto';
-                    return this.props.history.replace('/everis/list');
-                }else{
-                    result = 'no se encuentran registros';
-                }
-
-            });
-            alert(result);
+            let result = snapShots.docs.find(doc => doc.data().email === this.state.email && doc.data().password ===  this.state.password);
+            if(result === undefined){
+                alert('usuario no registrado!!');
+            }else {
+                alert('Bienvenido');
+                this.props.history.replace('/everis/list');
+            }
         }, error => {
             console.log(error);
         });
