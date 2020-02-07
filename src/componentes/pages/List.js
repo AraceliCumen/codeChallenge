@@ -3,20 +3,55 @@ import '../../css/List.css';
 
 import db from '../../FireStoreConfig';
 
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+
 
 class List extends Component {
 
     state = {
-        items: []
+        columnDefs: [{
+            headerName: "UserName", field: "userName"
+          }, {
+            headerName: "Password", field: "password"
+          }, {
+            headerName: "FirstName", field: "firstName"
+          }, {
+            headerName: "LastName", field: "lastName"
+          }, {
+            headerName: "Email", field: "email"
+          }],
+          rowData: []
     }
 
+    
+
+
     componentDidMount(){
+
+        let rowData = [];
+
         db.collection('users').get().then((snapShots)=>{
+            snapShots.docs.map(doc => {
+                let rowDataEjemplo = {
+                    userName: '', password: '' , firstName: '', lastName: '', email : ''
+                  };
+                
+                rowDataEjemplo.userName = doc.data().userName;
+                rowDataEjemplo.password = doc.data().password;
+                rowDataEjemplo.firstName = doc.data().firstName;
+                rowDataEjemplo.lastName = doc.data().lastName;
+                rowDataEjemplo.email = doc.data().email;
+                rowData.push(rowDataEjemplo);
+            });
+
             this.setState({
-                items:snapShots.docs.map(doc => {
-                    console.log(doc.data());
-                })
-            })
+                rowData:  rowData
+            });
+
+        },error => {
+            console.log(error);
         });
     }
 
