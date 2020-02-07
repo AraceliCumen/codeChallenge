@@ -7,6 +7,10 @@ class Start extends Component {
         this.props.history.replace('/everis/login');
     }
 
+    onButtonClickRegistrar = e => {
+        this.props.history.replace('/everis/register');
+    }
+
 
     render(){
         return (
