@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../../css/Login.css';
 
+import db from '../../FireStoreConfig';
+
 class Login extends Component {
 
     onButtonClick = e => {
