@@ -18,7 +18,7 @@ class Login extends Component {
         db.collection('users').get().then((snapShots) => {
             snapShots.docs.map(doc => {
                 let email = doc.data().email;
-                let password = doc.data().password;
+                let password = doc.data().password;    
                 if(email === this.state.email && password === this.state.password){
                     result = 'login correcto';
                     return this.props.history.replace('/everis/list');
