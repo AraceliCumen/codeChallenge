@@ -62,6 +62,14 @@ class List extends Component {
         });
     }
 
+    onButtonClickEditar = e => {
+        
+    }
+
+    onButtonClickEliminar = e => {
+        
+    }
+
     render() {
         return (
             <div className="container">
@@ -76,23 +84,14 @@ class List extends Component {
                                     width: '100%'
                                 }}
                             >
+                                <button className="btn btn-primary btn-md margin10" onClick={this.onButtonClickEditar}>Editar</button>
+                                
+                                <button className="btn btn-primary btn-md margin10" onClick={this.onButtonClickEliminar}>Eliminar</button>
+                                <br />
                                 <AgGridReact
                                     columnDefs={this.state.columnDefs}
-                                    rowData={this.state.rowData}>
+                                    rowData={this.state.rowData} rowSelection="multiple">
                                 </AgGridReact>
-
-                                <br />
-                                <div className="wrapper">
-                                    <span className="group-btn">
-                                        <a href="#" className="btn btn-primary btn-md">editar <i className="fa fa-sign-in" /></a>
-                                    </span>
-                                </div>
-                                <br />
-                                <div className="wrapper">
-                                    <span className="group-btn">
-                                        <a href="#" className="btn btn-primary btn-md">eliminar <i className="fa fa-sign-in" /></a>
-                                    </span>
-                                </div>
                             </div>
                         </div>
                     </div>
