@@ -1,7 +1,7 @@
-import React from 'react';
-import './Login.css';
+import React, {Component} from 'react';
+import './Register.css';
 
-function Login() {
+function Register() {
     return (
         <div className="container">
             <div className="row">
@@ -36,4 +36,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default Register;
