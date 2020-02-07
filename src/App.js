@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import List from './componentes/pages/List';
 import Login from './componentes/pages/Login';
 import Register from './componentes/pages/Register';
-import Start from './componentes/pages/Register';
+import Start from './componentes/pages/Start';
 
 
 let store = createStore(everis);
@@ -21,7 +21,7 @@ function App() {
 
     <Router>
       <div>
-        <Route exact path="/everis/start/" render={(props) => <Start {...props} store={store} />} />
+        <Route exact path="/everis/" render={(props) => <Start {...props} store={store} />} />
         <Route path="/everis/login" render={(props) => <Login {...props} store={store} />} />
         <Route path="/everis/list" render={(props) => <List {...props} store={store} />} />
         <Route path="/everis/register" render={(props) => <Register {...props} store={store} />} />
