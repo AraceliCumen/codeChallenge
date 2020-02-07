@@ -17,7 +17,7 @@ class Register extends Component {
 
     onChangeUsername = e => {
         this.setState({
-            username: e.target.value,
+            userName: e.target.value,
         })
     }
 
@@ -51,7 +51,12 @@ class Register extends Component {
 
     onButtonClick = e => {
         db.collection('users').add({
-            user:this.state,
+            userName: this.state.userName,
+            password: this.state.password,
+            firstName : this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            estado: this.state.estado
         }).then(()=>{
             alert('agregado');
         }).catch(()=>{
