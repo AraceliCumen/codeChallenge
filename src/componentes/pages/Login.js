@@ -19,10 +19,9 @@ class Login extends Component {
             snapShots.docs.map(doc => {
                 let email = doc.data().email;
                 let password = doc.data().password;
-                debugger;
                 if(email === this.state.email && password === this.state.password){
                     result = 'login correcto';
-                    this.props.history.replace('/everis/list');
+                    return this.props.history.replace('/everis/list');
                 }else{
                     result = 'no se encuentran registros';
                 }
