@@ -32,8 +32,6 @@ class List extends Component {
     }
 
 
-
-
     componentDidMount() {
 
         let rowData = [];
