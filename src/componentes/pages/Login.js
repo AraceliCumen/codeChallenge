@@ -1,12 +1,40 @@
 import React, { Component } from 'react';
 import '../../css/Login.css';
 
-import db from '../../FireStoreConfig';
+// import authFirebase from '../../FireStoreConfig';
+
 
 class Login extends Component {
 
+    state ={
+        email: '',
+        password: ''
+    }
+
     onButtonClick = e => {
-        
+        // let promise = authFirebase.signInWithEmailAndPassword(this.state.email, this.state.password);
+        // promise.catch(event => alert(event.message));
+
+        // authFirebase.onAuthStateChanged(firebaseUser => {
+        //     if (firebaseUser) {
+        //       alert('Usted se ha logueado Correctamente');
+        //       this.props.history.replace('/everis/list');
+        //     } else {
+        //       alert('usted no esta registrado');
+        //     }
+        //   });
+    }
+
+    onChangeUsername = e => {
+        this.setState({
+            userName: e.target.value,
+        })
+    }
+
+    onChangePassword = e => {
+        this.setState({
+            password: e.target.value,
+        })
     }
 
 
@@ -17,9 +45,9 @@ class Login extends Component {
                     <div className="col-md-offset-5 col-md-3">
                         <div className="form-login">
                             <h4>Login</h4>
-                            <input type="text" id="userName" className="form-control input-sm chat-input" placeholder="username" />
+                            <input type="text" id="email" onChange={this.onChangeUsername} className="form-control input-sm chat-input" placeholder="email" />
                             <br />
-                            <input type="text" id="userPassword" className="form-control input-sm chat-input" placeholder="password" />
+                            <input type="text" id="userPassword" onChange={this.onChangePassword}  className="form-control input-sm chat-input" placeholder="password" />
                             <br />
                             <div className="wrapper">
                                 <span className="group-btn">
