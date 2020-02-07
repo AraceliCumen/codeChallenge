@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 
 import 'firebase/firestore';
 
+import 'firebase/auth';
 
 firebase.initializeApp({
     apiKey: "AIzaSyCnQrP0TIudEFM1UvBtvrWg5f-KErcEuHM",
@@ -18,5 +19,6 @@ firebase.initializeApp({
 let db = firebase.firestore();
 db.settings({timestampsInSnapshots:true});
 
+export let authEveris = firebase.auth();
 
 export default db;

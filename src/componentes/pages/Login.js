@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import '../../css/Login.css';
 
-// import authFirebase from '../../FireStoreConfig';
+// import authEveris from '../../FireStoreConfig';
+
+import db from '../../FireStoreConfig';
 
 
 class Login extends Component {
@@ -12,22 +14,29 @@ class Login extends Component {
     }
 
     onButtonClick = e => {
-        // let promise = authFirebase.signInWithEmailAndPassword(this.state.email, this.state.password);
-        // promise.catch(event => alert(event.message));
+        var result = '';
+        db.collection('users').get().then((snapShots) => {
+            snapShots.docs.map(doc => {
+                let email = doc.data().email;
+                let password = doc.data().password;
+                debugger;
+                if(email === this.state.email && password === this.state.password){
+                    result = 'login correcto';
+                    this.props.history.replace('/everis/list');
+                }else{
+                    result = 'no se encuentran registros';
+                }
 
-        // authFirebase.onAuthStateChanged(firebaseUser => {
-        //     if (firebaseUser) {
-        //       alert('Usted se ha logueado Correctamente');
-        //       this.props.history.replace('/everis/list');
-        //     } else {
-        //       alert('usted no esta registrado');
-        //     }
-        //   });
+            });
+            alert(result);
+        }, error => {
+            console.log(error);
+        });
     }
 
     onChangeUsername = e => {
         this.setState({
-            userName: e.target.value,
+            email: e.target.value,
         })
     }
 
@@ -47,7 +56,7 @@ class Login extends Component {
                             <h4>Login</h4>
                             <input type="text" id="email" onChange={this.onChangeUsername} className="form-control input-sm chat-input" placeholder="email" />
                             <br />
-                            <input type="text" id="userPassword" onChange={this.onChangePassword}  className="form-control input-sm chat-input" placeholder="password" />
+                            <input type="text" id="userPassword" onChange={this.onChangePassword}  className="form-control input-sm chat-input" placeholder="password" type="password" />
                             <br />
                             <div className="wrapper">
                                 <span className="group-btn">
