@@ -72,13 +72,13 @@ class List extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-md-offset-1 col-md-10">
+                    <div className="col-md-12">
                         <div className="form-login">
                             <h4>List Users</h4>
                             <div
                                 className="ag-theme-balham"
                                 style={{
-                                    height: '400px',
+                                    height: '500px',
                                     width: '100%'
                                 }}
                             >
