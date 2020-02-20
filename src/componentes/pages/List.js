@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../css/List.css';
+import '../../css/List.scss';
 
 import db from '../../FireStoreConfig';
 

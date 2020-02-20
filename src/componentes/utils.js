@@ -2,6 +2,11 @@ export function validaCorreo(correo){
   return parmRegex.EMAIL.test(correo);
 }
 
+export function validaPassword(password){
+  return parmRegex.ALPHANUMERIC_ALL.test(password);
+}
+
+
 
 const parmRegex = {
     NUMERIC: /^[0-9]+$/,
@@ -14,7 +19,7 @@ const parmRegex = {
     ALPHANUMERIC_NO_SPACE: /^[ña-z0-9]+$/i,
     ALPHANUMERIC: /^[\sñáéíóúüa-z0-9.]+$/i,
     ALPHANUMERIC_NO_POINT: /^[\sña-z0-9]+$/i,
-    ALPHANUMERIC_ALL: /^[\s°&,#ñáéíóúüa-z0-9.]+$/i,
+    ALPHANUMERIC_ALL: /^[\s°&,#ñáéíóúüa-z0-9@#.]+$/i,
     ALPHA_DASH: /^[a-z0-9_\-]+$/i,
     NUM_NATURAL: /^[0-9]+$/i,
     CODIGO_DISTRITO: /^[0-9]{6}-[0-9]{6}$/,

@@ -15,7 +15,7 @@ class Start extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-md-offset-5 col-md-3">
+                    <div className="offset-md-5 col-md-3">
                         <div className="form-login">
                             <h4>Bienvenidos</h4>
                             <div className="wrapper">
