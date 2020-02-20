@@ -12,7 +12,9 @@ class List extends Component {
 
     state = {
         columnDefs: [{
-            headerName: "UserName", field: "userName", checkboxSelection: true, sortable: true, filter: true
+            headerName: "IdUser", field: "idUser", checkboxSelection: true, sortable: true, filter: true
+        }, {
+            headerName: "UserName", field: "userName", sortable: true, filter: true
         }, {
             headerName: "Password", field: "password"
         }, {
@@ -21,11 +23,11 @@ class List extends Component {
             headerName: "LastName", field: "lastName"
         }, {
             headerName: "Email", field: "email"
-        },{
+        }, {
             headerName: "Estado", field: "estado"
-        },{
+        }, {
             headerName: "Editar", field: "editar"
-        },{
+        }, {
             headerName: "Eliminar", field: "eliminar"
         }],
         rowData: []
@@ -39,8 +41,9 @@ class List extends Component {
         db.collection('users').get().then((snapShots) => {
             snapShots.docs.map(doc => {
                 let rowDataEjemplo = {
-                    userName: '', password: '', firstName: '', lastName: '', email: '', estado : '', editar: 'editar' , eliminar: 'eliminar'
+                    idUser: '', userName: '', password: '', firstName: '', lastName: '', email: '', estado: '', editar: 'editar', eliminar: 'eliminar'
                 };
+                rowDataEjemplo.idUser = doc.id;
                 rowDataEjemplo.userName = doc.data().userName;
                 rowDataEjemplo.password = doc.data().password;
                 rowDataEjemplo.firstName = doc.data().firstName;
@@ -50,7 +53,7 @@ class List extends Component {
                 rowData.push(rowDataEjemplo);
             });
 
-        
+
             this.setState({
                 rowData: rowData
             });
@@ -61,11 +64,21 @@ class List extends Component {
     }
 
     onButtonClickEditar = e => {
-        
+
     }
 
     onButtonClickEliminar = e => {
-        
+        const selectedNodes = this.gridApi.getSelectedNodes()
+        const selectedData = selectedNodes.map(node => node.data)
+        const selectedDataStringPresentation = selectedData.map(node => {
+            db.collection("users").doc(node.idUser).delete().then(function () {
+                alert('Usuario eliminado correctamente');
+                this.props.history.replace('/demo');
+            }).catch(function (error) {
+                alert("Error eliminando usuario");
+            });
+        });
+
     }
 
     render() {
@@ -83,10 +96,10 @@ class List extends Component {
                                 }}
                             >
                                 <button className="btn btn-primary btn-md margin10" onClick={this.onButtonClickEditar}>Editar</button>
-                                
+
                                 <button className="btn btn-primary btn-md margin10" onClick={this.onButtonClickEliminar}>Eliminar</button>
                                 <br />
-                                <AgGridReact
+                                <AgGridReact onGridReady={params => this.gridApi = params.api}
                                     columnDefs={this.state.columnDefs}
                                     rowData={this.state.rowData} rowSelection="multiple">
                                 </AgGridReact>

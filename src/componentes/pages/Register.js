@@ -42,6 +42,19 @@ class Register extends Component {
 
     }
 
+    
+    validarUsername(valorUserName){
+        let valido = false;
+        if(valorUserName.trim().length > 0 ){
+            this.setState({ errorUserName: MENSAJES_ERROR.SIN_ERROR });
+            valido = true
+        }else {
+            this.setState({ errorUserName: MENSAJES_ERROR.ERROR_CAMPO_VACIO});
+            valido = false
+        } 
+        return valido;
+    }
+
     onBlurUsername(e){
         this.validarUsername(e.target.value);
     }
@@ -96,6 +109,22 @@ class Register extends Component {
         }
     }
 
+    validarFirstName(valorFirstName){
+        let valido = false;
+        if(valorFirstName.trim().length > 0 ){
+            this.setState({ errorFirstName: MENSAJES_ERROR.SIN_ERROR });
+            valido = true
+        }else {
+            this.setState({ errorFirstName: MENSAJES_ERROR.ERROR_CAMPO_VACIO});
+            valido = false
+        } 
+        return valido;
+    }
+
+    onBlurFirstName(e){
+        this.validarFirstName(e.target.value);
+    }
+
     onChangeLastName = e => {
         let lastNameValido = this.validarLastName(e.target.value);
         if(lastNameValido){
@@ -110,6 +139,23 @@ class Register extends Component {
             })
         }
     }
+
+    validarLastName(valorLastName){
+        let valido = false;
+        if(valorLastName.trim().length > 0 ){
+            this.setState({ errorLastName: MENSAJES_ERROR.SIN_ERROR });
+            valido = true
+        }else {
+            this.setState({ errorLastName: MENSAJES_ERROR.ERROR_CAMPO_VACIO});
+            valido = false
+        } 
+        return valido;
+    }
+
+    onBlurLastName(e){
+        this.validarLastName(e.target.value);
+    }
+
 
     onChangeEmail = e => {
         let emailValido = this.validarCorreo(e.target.value);
@@ -146,80 +192,29 @@ class Register extends Component {
         return valido;
     }
 
-    validarUsername(valorUserName){
-        let valido = false;
-        if(valorUserName.trim().length > 0 ){
-            this.setState({ errorUserName: MENSAJES_ERROR.SIN_ERROR });
-            valido = true
-        }else {
-            this.setState({ errorUserName: MENSAJES_ERROR.ERROR_CAMPO_VACIO});
-            valido = false
-        } 
-        return valido;
-    }
-
-    validarFirstName(valorFirstName){
-        let valido = false;
-        if(valorFirstName.trim().length > 0 ){
-            this.setState({ errorFirstName: MENSAJES_ERROR.SIN_ERROR });
-            valido = true
-        }else {
-            this.setState({ errorFirstName: MENSAJES_ERROR.ERROR_CAMPO_VACIO});
-            valido = false
-        } 
-        return valido;
-    }
-
-    onBlurFirstName(e){
-        this.validarFirstName(e.target.value);
-    }
-
-    validarLastName(valorLastName){
-        let valido = false;
-        if(valorLastName.trim().length > 0 ){
-            this.setState({ errorLastName: MENSAJES_ERROR.SIN_ERROR });
-            valido = true
-        }else {
-            this.setState({ errorLastName: MENSAJES_ERROR.ERROR_CAMPO_VACIO});
-            valido = false
-        } 
-        return valido;
-    }
-
-    onBlurLastName(e){
-        this.validarLastName(e.target.value);
-    }
-
-    validarUsername(valorUserName){
-        let valido = false;
-        if(valorUserName.trim().length > 0 ){
-            this.setState({ errorUserName: MENSAJES_ERROR.SIN_ERROR });
-            valido = true
-        }else {
-            this.setState({ errorPassword: MENSAJES_ERROR.ERROR_CAMPO_VACIO});
-            valido = false
-        } 
-        return valido;
-    }
-
-
     onButtonClickListar = e => {
         this.props.history.replace('/demo/list');
     }
 
     onButtonClick = e => {
-        db.collection('users').add({
-            userName: this.state.userName,
-            password: this.state.password,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            email: this.state.email,
-            estado: this.state.estado
-        }).then(() => {
-            alert('agregado');
-        }).catch(() => {
-            alert('error al agregar');
-        })
+        if(this.state.userNameValido && this.state.emailValido &&
+           this.state.firstNameValido && this.state.lastNameValido 
+           && this.state.passwordValido){
+            db.collection('users').add({
+                userName: this.state.userName,
+                password: this.state.password,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                email: this.state.email,
+                estado: this.state.estado
+            }).then(() => {
+                alert('Usuario Registrado Correctamente');
+            }).catch(() => {
+                alert('Error al registar usuario');
+            })
+        }else{
+            alert('Revisar Campos ingresados')
+        }
     }
 
 
