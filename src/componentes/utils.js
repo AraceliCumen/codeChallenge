@@ -3,7 +3,7 @@ export function validaCorreo(correo){
 }
 
 export function validaPassword(password){
-  return parmRegex.ALPHANUMERIC_ALL.test(password);
+  return parmRegex.ALPHANUMERIC_SPECIAL_CHARACTER.test(password);
 }
 
 
@@ -29,7 +29,8 @@ const parmRegex = {
     NUMERIC_DASH: /^[\d\-\s]+$/,
     URL: /^((http|https):\/\/(\w+:{0,1}\w*@)?(\S+)|)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/,
     DATE_YYYY_MM_DD: /\d{4}-\d{1,2}-\d{1,2}/,
-    DATA_DD_MM_YYYY: /\d{1,2}-\d{1,2}-\d{4}/
+    DATA_DD_MM_YYYY: /\d{1,2}-\d{1,2}-\d{4}/,
+    ALPHANUMERIC_SPECIAL_CHARACTER : /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})(?=(?:.*[@#$?¡\-_]){1})\S{8,16}$/
   }
 
   export function validaAlfa(texto){

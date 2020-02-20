@@ -23,17 +23,22 @@ class Login extends Component {
     }
 
     onButtonClick = e => {
-        db.collection('users').get().then((snapShots) => {
-            let result = snapShots.docs.find(doc => doc.data().email === this.state.email && doc.data().password === this.state.password);
-            if (result === undefined) {
-                alert('usuario o contraseña incorrectos!!');
-            } else {
-                alert('Bienvenido');
-                this.props.history.replace('/demo/list');
-            }
-        }, error => {
-            console.log(error);
-        });
+        if(this.state.emailValido && this.state.passwordValido){
+            db.collection('users').get().then((snapShots) => {
+                let result = snapShots.docs.find(doc => doc.data().email === this.state.email && doc.data().password === this.state.password);
+                if (result === undefined) {
+                    alert('usuario o contraseña incorrectos!!');
+                } else {
+                    alert('Bienvenido');
+                    this.props.history.replace('/demo/list');
+                }
+            }, error => {
+                console.log(error);
+            });
+        }else {
+            alert('Revisar Campos ingresados')
+        }
+
     }
 
     onChangeUsername = e => {
@@ -43,6 +48,11 @@ class Login extends Component {
             this.setState({
                 email: e.target.value,
                 emailValido: true
+            })
+        }else{
+            this.setState({
+                email: '',
+                emailValido: false
             })
         }
     }
@@ -54,6 +64,11 @@ class Login extends Component {
             this.setState({
                 password: e.target.value,
                 passwordValido: true
+            })
+        }else{
+            this.setState({
+                password: '',
+                passwordValido: false
             })
         }
     }
@@ -83,7 +98,7 @@ class Login extends Component {
 
     validarPassword(valorPassword) {
         let valido = false;
-        if (valorPassword.trim().length > 0 && utils.validaPassword(valorCorreo)) {
+        if (valorPassword.trim().length > 0 && utils.validaPassword(valorPassword)) {
             this.setState({ errorPassword: MENSAJES_ERROR.SIN_ERROR });
             valido = true
         } else if (valorPassword === '') {
@@ -100,10 +115,10 @@ class Login extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-md-offset-5 col-md-3">
+                    <div className="offset-md-5 col-md-3">
                         <div className="form-login">
                             <h4>Login</h4>
-                            <TextField type="text" id="email" onChange={this.onChangeUsername} onblur={this.onBlurCorreo} className="form-control input-sm chat-input" placeholder="email" error={this.state.errorEmail} />
+                            <TextField type="email" id="email" onChange={this.onChangeUsername} onblur={this.onBlurCorreo} className="form-control input-sm chat-input" placeholder="email" error={this.state.errorEmail} />
                             <br />
                             <TextField type="password" id="userPassword" onChange={this.onChangePassword} onblur={this.onBlurPasswword} className="form-control input-sm chat-input" placeholder="password" type="password" error={this.state.errorPassword} />
                             <br />
@@ -126,7 +141,7 @@ const MENSAJES_ERROR = {
     ERROR_CORREO_NO_VALIDO: 'Ingresa un correo válido',
     ERROR_CORREO_VACIO: 'Ingresa un Correo electrónico.',
     ERROR_PASSWORD_NO_VALIDO: 'Ingrese Password Válido',
-    ERROR_PASSWORD_VACIO: 'Ingre un Password'
+    ERROR_PASSWORD_VACIO: 'Ingrese un Password'
 }
 
 

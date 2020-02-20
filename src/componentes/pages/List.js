@@ -74,7 +74,7 @@ class List extends Component {
                 <div className="row">
                     <div className="col-md-12">
                         <div className="form-login">
-                            <h4>List Users</h4>
+                            <h4>Lista de Usuarios</h4>
                             <div
                                 className="ag-theme-balham"
                                 style={{
