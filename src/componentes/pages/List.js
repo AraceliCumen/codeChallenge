@@ -70,10 +70,9 @@ class List extends Component {
     onButtonClickEliminar = e => {
         const selectedNodes = this.gridApi.getSelectedNodes()
         const selectedData = selectedNodes.map(node => node.data)
-        const selectedDataStringPresentation = selectedData.map(node => {
+        selectedData.map(node => {
             db.collection("users").doc(node.idUser).delete().then(function () {
                 alert('Usuario eliminado correctamente');
-                this.props.history.replace('/demo');
             }).catch(function (error) {
                 alert("Error eliminando usuario");
             });
