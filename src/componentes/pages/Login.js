@@ -16,7 +16,7 @@ class Login extends Component {
     state ={
         email: '',
         password: '',
-        errorCorreo: '',
+        errorCorreo: '123',
         errorPassword: ''
     }
 
@@ -40,17 +40,19 @@ class Login extends Component {
         })
     }
 
-    onChangePassword = e => {
+    onChangePassword = e => {debugger;
         this.setState({
             password: e.target.value,
         })
     }
 
     onBlurCorreo(e) {
+        debugger;
         this.validarCorreo(this.state.email);
     }
 
     validarCorreo(valorCorreo) {
+        debugger;
         let valido = false;
         if (valorCorreo.trim().length > 0 && utils.validaCorreo(valorCorreo)) {
           this.setState({ errorCorreo: MENSAJES_ERROR.SIN_ERROR });
@@ -65,6 +67,10 @@ class Login extends Component {
         return valido;
     }
 
+    onBlurPasswword(e){
+
+    }
+
     render(){
         return (
             <div className="container">
@@ -74,7 +80,7 @@ class Login extends Component {
                             <h4>Login</h4>
                             <TextField type="text" id="email" onChange={this.onChangeUsername}  onblur={this.onBlurCorreo} className="form-control input-sm chat-input" placeholder="email" error={this.props.errorCorreo}/>
                             <br />
-                            <TextField type="password" id="userPassword" onChange={this.onChangePassword}   className="form-control input-sm chat-input" placeholder="password" type="password" error={this.props.errorPassword}/>
+                            <TextField type="password" id="userPassword" onChange={this.onChangePassword} onblur={this.onBlurPasswword}  className="form-control input-sm chat-input" placeholder="password" type="password" error={this.props.errorPassword}/>
                             <br />
                             <div className="wrapper">
                                 <span className="group-btn">

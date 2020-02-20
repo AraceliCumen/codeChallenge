@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class Texfield extends Component {
     render() {
 
-        debugger;
         let htmlError = '';
         if(this.props.error !== '' && this.props.error !== undefined){
             htmlError = <div className="alert alert-danger" role="alert">
