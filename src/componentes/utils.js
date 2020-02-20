@@ -1,3 +1,8 @@
+export function validaCorreo(correo){
+  return parmRegex.EMAIL.test(correo);
+}
+
+
 const parmRegex = {
     NUMERIC: /^[0-9]+$/,
     INTEGER: /^\-?[0-9]+$/,

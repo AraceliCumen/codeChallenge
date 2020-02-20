@@ -21,10 +21,10 @@ function App() {
 
     <Router>
       <div>
-        <Route exact path="/everis/" render={(props) => <Start {...props} store={store} />} />
-        <Route path="/everis/login" render={(props) => <Login {...props} store={store} />} />
-        <Route path="/everis/list" render={(props) => <List {...props} store={store} />} />
-        <Route path="/everis/register" render={(props) => <Register {...props} store={store} />} />
+        <Route exact path="/demo/" render={(props) => <Start {...props} store={store} />} />
+        <Route path="/demo/login" render={(props) => <Login {...props} store={store} />} />
+        <Route path="/demo/list" render={(props) => <List {...props} store={store} />} />
+        <Route path="/demo/register" render={(props) => <Register {...props} store={store} />} />
       </div>
     </Router>
   );

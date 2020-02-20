@@ -46,7 +46,7 @@ class Register extends Component {
     }
 
     onButtonClickListar = e => {
-        this.props.history.replace('/everis/list');
+        this.props.history.replace('/demo/list');
     }
 
     onButtonClick = e => {

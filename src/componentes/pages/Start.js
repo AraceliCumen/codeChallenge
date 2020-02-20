@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-// import './Start.css';
 
 class Start extends Component {
 
     onButtonClickIniciar = e => {
-        this.props.history.replace('/everis/login');
+        this.props.history.replace('/demo/login');
     }
 
     onButtonClickRegistrar = e => {
-        this.props.history.replace('/everis/register');
+        this.props.history.replace('/demo/register');
     }
 
 
